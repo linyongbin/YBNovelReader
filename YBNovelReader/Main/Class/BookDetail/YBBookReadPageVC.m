@@ -53,6 +53,13 @@
 
 @implementation YBBookReadPageVC
 
+-(void)loadView
+{
+    UIView *view = [[RDReadPageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.view = view;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -232,6 +239,148 @@
     NSAttributedString *charpterContent = currentController.charpterContent;    //当前章节内容
     NSArray *pages = currentController.pages;       //分页信息数组
     [self.pageViewController setViewControllers:@[[self p_creatReadController:self.bookDetail.charpterModel.chapterName content:[self p_getCurPageContentWithContent:charpterContent page:self.bookDetail.page pages:pages] page:[self p_safePage:self.bookDetail.page totalPages:pages.count] totalPage:pages.count charpterIndex:charpter totalCharpter:self.charpters.count charpterModel:self.bookDetail.charpterModel charpterContent:charpterContent pages:pages]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+}
+
+#pragma mark - UIPageViewContrillerDelegate
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (completed) {
+        [self p_saveRecord];
+    }
+}
+
+#pragma mark - UIPageViewControllerDataSource
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    if (self.pageViewController.transitionStyle == UIPageViewControllerTransitionStylePageCurl) {
+        YBBookReadVC *currentController = (YBBookReadVC *)viewController;
+//        if (!currentController.mirror) {
+        YBBookReadVC *mirrorController = (YBBookReadVC *)[self p_afterOrBeforeWithViewController:viewController before:YES mirror:YES];
+        return mirrorController;
+//        }
+        return [self p_creatReadController:currentController.charpter content:currentController.content page:currentController.page totalPage:currentController.totalPage charpterIndex:currentController.charpterIndex totalCharpter:currentController.totalCharpter charpterModel:currentController.charpterModel charpterContent:currentController.charpterContent pages:currentController.pages mirror:NO];
+    }
+    return [self p_afterOrBeforeWithViewController:viewController before:YES];
+}
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if (self.pageViewController.transitionStyle == UIPageViewControllerTransitionStylePageCurl) {
+        YBBookReadVC *currentController = (YBBookReadVC *)viewController;
+//        if (!currentController.mirror) {
+        return [self p_creatReadController:currentController.charpter content:currentController.content page:currentController.page totalPage:currentController.totalPage charpterIndex:currentController.charpterIndex totalCharpter:currentController.totalCharpter charpterModel:currentController.charpterModel charpterContent:currentController.charpterContent pages:currentController.pages mirror:YES];
+//        }
+    }
+   return [self p_afterOrBeforeWithViewController:viewController before:NO];
+    
+}
+
+
+/// 返回前一个或者后一个控制器
+/// @param controller 当前控制区内
+/// @param before 是否是前一个控制器
+-(UIViewController *)p_afterOrBeforeWithViewController:(UIViewController *)controller before:(BOOL)before
+{
+    return [self p_afterOrBeforeWithViewController:controller before:before mirror:NO];
+
+}
+-(UIViewController *)p_afterOrBeforeWithViewController:(UIViewController *)controller before:(BOOL)before mirror:(BOOL)mirror
+{
+    YBBookReadVC *currentController = (YBBookReadVC *)controller;
+    NSInteger page = currentController.page;   //当前页数
+    NSInteger charpter = currentController.charpterIndex; //当前章节
+    YBBookChapterModel *charpterModel = currentController.charpterModel;   //当前章节信息
+    NSAttributedString *charpterContent = currentController.charpterContent;    //当前章节内容
+    NSArray *pages = currentController.pages;       //分页信息数组
+    
+    
+    UIPageViewControllerNavigationDirection direction;
+    if (before) {
+        direction = UIPageViewControllerNavigationDirectionReverse;
+    }
+    else{
+        direction = UIPageViewControllerNavigationDirectionForward;
+    }
+    
+    BOOL animate = YES;
+//    if ([RDReadConfigManager sharedInstance].pageType == RDNoneTypePage) {
+//        animate = NO;
+//    }
+//    else{
+//        animate = YES;
+//    }
+    
+    if (before) {
+        if (page == 0 && charpter == 0) {
+           //第一章，第一页，不用做任何处理
+            return nil;
+        }
+    }
+    else{
+        if (page == pages.count-1 && charpter == self.charpters.count-1) {
+            //最后一张最后一页，不用做任何处理
+            return nil;
+        }
+    }
+    if ((before && (page == 0)) || (!before && (page == pages.count-1) )) {
+        //上一章的数据 或者下一章的数据
+        NSString *charpterId;
+        if (before) {
+            charpterId = self.charpters[charpter-1].charpterId;
+        }
+        else{
+            charpterId = self.charpters[charpter+1].charpterId;
+        }
+        
+        YBBookChapterModel *otherCharpterModel = [YBBookChapterManager getCharpterWithBookId:self.bookDetail.bookId charpterId:charpterId];
+        if (otherCharpterModel.chapterContent.length == 0) {
+            //内容不存在
+            __block YBBookReadVC * readController;
+            //内容不存在
+            [[YBNetwork sharedManager] getBookChapterDetailWithUrl:otherCharpterModel.charpterId WithBlock:^(YBRequestResult * _Nonnull result, NSError * _Nonnull error) {
+                if ([YBResultError hasErrorWithReslut:result error:error]) {
+                    return;
+                }
+                NSString *contentStr = result.data;
+                [YBReadParser paginateWithContent:contentStr charpter:otherCharpterModel.chapterName bounds:CGRectMake(0, 0, ScreenWidth-kLeftMargin-kRightMargin, ScreenHeight-kTopMargin-kBottomMargin) complete:^(NSAttributedString * _Nonnull content, NSArray * _Nonnull pages) {
+                    if (before) {
+                        //上一章
+                        YBBookReadVC * readController = [self p_creatReadController:otherCharpterModel.chapterName content:[self p_getCurPageContentWithContent:content page:pages.count-1 pages:pages] page:pages.count-1 totalPage:pages.count charpterIndex:[self.charpters indexOfObject:otherCharpterModel] totalCharpter:self.charpters.count charpterModel:otherCharpterModel charpterContent:content pages:pages];
+                        YBBookReadVC * mirror_readController = [self p_creatReadController:otherCharpterModel.chapterName content:[self p_getCurPageContentWithContent:content page:pages.count-1 pages:pages] page:pages.count-1 totalPage:pages.count charpterIndex:[self.charpters indexOfObject:otherCharpterModel] totalCharpter:self.charpters.count charpterModel:otherCharpterModel charpterContent:content pages:pages mirror:YES];
+                        [self.pageViewController setViewControllers:@[readController,mirror_readController] direction:direction animated:animate completion:nil];
+                    }
+                    else{
+                        //下一章
+                        YBBookReadVC * mirror_readController = [self p_creatReadController:currentController.charpter content:currentController.content page:currentController.page totalPage:currentController.totalPage charpterIndex:currentController.charpterIndex totalCharpter:currentController.totalCharpter charpterModel:currentController.charpterModel charpterContent:currentController.charpterContent pages:currentController.pages mirror:YES];
+                        //后一页
+                        YBBookReadVC * readController = [self p_creatReadController:otherCharpterModel.chapterName content:[self p_getCurPageContentWithContent:content page:0 pages:pages] page:0 totalPage:pages.count charpterIndex:[self.charpters indexOfObject:otherCharpterModel] totalCharpter:self.charpters.count charpterModel:otherCharpterModel charpterContent:content pages:pages];
+                        [self.pageViewController setViewControllers:@[readController,mirror_readController] direction:direction animated:animate completion:nil];
+                        
+                    }
+                    
+                
+                    [self p_saveRecord];
+                }];
+            }];
+            return readController;
+        }else{
+            //需要重新分页
+            __block YBBookReadVC *readController = nil;
+            [YBReadParser paginateWithContent:otherCharpterModel.chapterContent charpter:otherCharpterModel.bookName bounds:CGRectMake(0, 0, ScreenWidth-kLeftMargin-kRightMargin, ScreenHeight-kTopMargin-kBottomMargin) complete:^(NSAttributedString * _Nonnull content, NSArray * _Nonnull pages) {
+                
+                readController = [self p_creatReadController:otherCharpterModel.chapterName content:[self p_getCurPageContentWithContent:content page:before?pages.count-1:0 pages:pages] page:before?pages.count-1:0 totalPage:pages.count charpterIndex:[self.charpters indexOfObject:otherCharpterModel] totalCharpter:self.charpters.count charpterModel:otherCharpterModel charpterContent:content pages:pages mirror:mirror];
+        
+                
+            }];
+            return readController;
+        }
+        
+
+    }
+    else{
+        YBBookReadVC *readController = [self p_creatReadController:charpterModel.chapterName content:[self p_getCurPageContentWithContent:charpterContent page:before?page-1:page+1 pages:pages] page:before?page-1:page+1 totalPage:pages.count charpterIndex:charpter totalCharpter:self.charpters.count charpterModel:charpterModel charpterContent:charpterContent pages:pages mirror:mirror];
+        return readController;
+        
+    }
 }
 
 #pragma mark - YBBookReadVCDelegate

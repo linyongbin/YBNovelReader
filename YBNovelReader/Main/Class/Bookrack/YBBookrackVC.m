@@ -12,6 +12,7 @@
 #import "YBBookDetailModel.h"
 #import "MJRefresh.h"
 #import "YBBookReadPageVC.h"
+#import "AFTabBarViewController.h"
 
 @interface YBBookrackVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -76,6 +77,7 @@
         vc.bookUrl = model.bookUrl;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    [(AFTabBarViewController *)self.tabBarController HideTabBar];
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {

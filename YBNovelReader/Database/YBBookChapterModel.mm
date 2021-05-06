@@ -5,6 +5,7 @@
 //  Created by linyongbin on 2021/4/30.
 //
 
+#import "YBBookChapterModel+WCTTableCoding.h"
 #import "YBBookChapterModel.h"
 #import <WCDB.h>
 #import "TFHpple.h"
@@ -25,7 +26,7 @@ WCDB_PRIMARY(YBBookChapterModel, primaryId)
 -(NSString *)primaryId
 {
     if (!_primaryId) {
-        _primaryId = [NSString stringWithFormat:@"%@%@",@(_bookId),_charpterId];
+        _primaryId = [NSString stringWithFormat:@"%@%@",_bookId,_charpterId];
     }
     return _primaryId;
 }
@@ -38,6 +39,21 @@ WCDB_PRIMARY(YBBookChapterModel, primaryId)
         [content appendString:model.content];
     }
     return content;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) {
+        return YES;
+    }
+    if ([object isKindOfClass:self.class]) {
+        YBBookChapterModel *model = object;
+           if (self.charpterId == model.charpterId && self.charpterId!=0) {
+               return YES;
+           }
+    }
+   
+    return NO;
 }
 
 @end

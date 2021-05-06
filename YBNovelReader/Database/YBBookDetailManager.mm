@@ -18,11 +18,14 @@
     if ([bookModel.bookName isEqualToString:model.bookName]) {
         return;
     }
-        
-    model.bookId = bookModel?bookModel.bookId+1:1;
     model.readTime = [NSDate date].timeIntervalSince1970;
-    [[YBDatabaseManager sharedInstance].database insertOrReplaceObject:model into:kBookrackTable];
-    [YBBookChapterManager insertObjectsWithCharpters:model.charpterList];
+    BOOL success = [[YBDatabaseManager sharedInstance].database insertOrReplaceObject:model into:kBookrackTable];
+    if (success) {
+        NSLog(@"%@-加入书架",model.bookName);
+        [YBBookChapterManager insertObjectsWithCharpters:model.charpterList];
+    }else{
+        NSLog(@"%@-加入失败",model.bookName);
+    }
 }
 
 +(void)updateBookshelfState:(YBBookDetailModel *)model{
@@ -44,13 +47,13 @@
 }
 
 /// 获取书籍信息
-+(YBBookDetailModel *)getReadRecordWithBookId:(NSInteger)bookid{
-    return [[YBDatabaseManager sharedInstance].database getOneObjectOfClass:YBBookDetailModel.class fromTable:kBookrackTable where:YBBookDetailModel.bookId.is(bookid)];
++(YBBookDetailModel *)getReadRecordWithBookId:(NSString *)bookId{
+    return [[YBDatabaseManager sharedInstance].database getOneObjectOfClass:YBBookDetailModel.class fromTable:kBookrackTable where:YBBookDetailModel.bookId.is(bookId)];
 }
 /// 删除书籍
-+(void)removeBookFromBookShelfWithBookId:(NSInteger)bookid{
-    [[YBDatabaseManager sharedInstance].database deleteObjectsFromTable:kBookrackTable where:YBBookDetailModel.bookId.is(bookid)];
-    [YBBookChapterManager deleteAllCharpterWithBookId:bookid];
++(void)removeBookFromBookShelfWithBookId:(NSString *)bookId{
+    [[YBDatabaseManager sharedInstance].database deleteObjectsFromTable:kBookrackTable where:YBBookDetailModel.bookId.is(bookId)];
+    [YBBookChapterManager deleteAllCharpterWithBookId:bookId];
 }
 
 @end

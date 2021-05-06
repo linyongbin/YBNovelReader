@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YBBookDetailModel : NSObject
-@property (nonatomic,assign) NSInteger bookId;
+@property (nonatomic, copy) NSString *bookId;
 @property (nonatomic, copy) NSString *bookName;
 @property (nonatomic, copy) NSString *bookAuthor;
 @property (nonatomic, copy) NSString *bookImage;

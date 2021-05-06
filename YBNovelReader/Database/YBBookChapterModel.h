@@ -5,11 +5,11 @@
 //  Created by linyongbin on 2021/4/30.
 //
 
-#import <Foundation/Foundation.h>
+#import "YBBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YBBookChapterModel : NSObject
+@interface YBBookChapterModel : YBBaseModel
 @property (nonatomic,copy) NSString *primaryId;
 
 @property (nonatomic, copy) NSString *chapterName;
@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *chapterContent;
 
 //数据库存储使用
-@property (nonatomic,assign) NSInteger bookId;
-@property (nonatomic,strong) NSString *bookName;
-@property (nonatomic,strong) NSString *author;
+@property (nonatomic,copy) NSString *bookId;
+@property (nonatomic,copy) NSString *bookName;
+@property (nonatomic,copy) NSString *author;
 @end
 
 NS_ASSUME_NONNULL_END

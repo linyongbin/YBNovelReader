@@ -5,7 +5,7 @@
 //  Created by linyongbin on 2021/4/30.
 //
 
-#import <Foundation/Foundation.h>
+#import "YBBaseModel.h"
 #import <WCDB.h>
 #define kBookDatabase @"book"
 #define kCharpterTable @"chapter"
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YBDatabaseManager : NSObject
+@interface YBDatabaseManager : YBBaseModel
 
 @property (nonatomic,strong) WCTDatabase *database;
 

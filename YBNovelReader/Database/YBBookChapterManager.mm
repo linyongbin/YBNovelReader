@@ -13,37 +13,42 @@
 
 @implementation YBBookChapterManager
 
-+(NSArray *)getBriefCharptersWithBookId:(NSInteger)bookid{
-    return [[YBDatabaseManager sharedInstance].database getObjectsOnResults:{YBBookChapterModel.charpterId,YBBookChapterModel.bookName,YBBookChapterModel.bookId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookid) orderBy:YBBookChapterModel.charpterId.order(WCTOrderedAscending)];
++(NSArray *)getBriefCharptersWithBookId:(NSString *)bookId{
+    return [[YBDatabaseManager sharedInstance].database getObjectsOnResults:{YBBookChapterModel.charpterId,YBBookChapterModel.bookName,YBBookChapterModel.bookId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId) orderBy:YBBookChapterModel.charpterId.order(WCTOrderedAscending)];
 }
 
-
-+(BOOL)isExsitWithBookId:(NSInteger)bookid
++(BOOL)isExsitWithBookId:(NSString *)bookId
 {
-    YBBookChapterModel *model = [[YBDatabaseManager sharedInstance].database getOneObjectOnResults:{YBBookChapterModel.primaryId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookid)];
+    YBBookChapterModel *model = [[YBDatabaseManager sharedInstance].database getOneObjectOnResults:{YBBookChapterModel.primaryId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId)];
     return model?YES:NO;
 }
 
-+(BOOL)isExsitWithBookId:(NSInteger)bookid charpterId:(NSString *)charpterId
++(BOOL)isExsitWithBookId:(NSString *)bookId charpterId:(NSString *)charpterId
 {
-    YBBookChapterModel *model = [[YBDatabaseManager sharedInstance].database getOneObjectOnResults:{YBBookChapterModel.primaryId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookid)&&YBBookChapterModel.charpterId.is(charpterId)];
+    YBBookChapterModel *model = [[YBDatabaseManager sharedInstance].database getOneObjectOnResults:{YBBookChapterModel.primaryId} fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId)&&YBBookChapterModel.charpterId.is(charpterId)];
     return model?YES:NO;
 }
 
 
-+(YBBookChapterModel *)getCharpterWithBookId:(NSInteger)bookId charpterId:(NSString *)charpterId{
++(YBBookChapterModel *)getCharpterWithBookId:(NSString *)bookId charpterId:(NSString *)charpterId{
     return [[YBDatabaseManager sharedInstance].database getOneObjectOfClass:YBBookChapterModel.class fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId)&&YBBookChapterModel.charpterId.is(charpterId)];
 }
 
-+(NSString *)getFirstCharpterIdWirhBookId:(NSInteger)bookId{
++(NSString *)getFirstCharpterIdWirhBookId:(NSString *)bookId{
     return [[YBDatabaseManager sharedInstance].database getOneValueOnResult:YBBookChapterModel.charpterId.min() fromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId)];
 }
 
 + (void)updateCharpterContentWithModel:(YBBookChapterModel *)model{
-    [[YBDatabaseManager sharedInstance].database updateRowsInTable:kCharpterTable onProperty:YBBookChapterModel.chapterContent withObject:model where:YBBookChapterModel.bookId.is(model.bookId)&&YBBookChapterModel.charpterId.is(model.charpterId)];
+    BOOL success = [[YBDatabaseManager sharedInstance].database updateRowsInTable:kCharpterTable onProperty:YBBookChapterModel.chapterContent withObject:model where:YBBookChapterModel.bookId.is(model.bookId)&&YBBookChapterModel.charpterId.is(model.charpterId)];
+    if (success) {
+        NSLog(@"%@-%@ 更新成功",model.bookName,model.chapterName);
+    }else{
+        NSLog(@"%@-%@ 更新失败",model.bookName,model.chapterName);
+    }
+//    [[YBDatabaseManager sharedInstance].database updateRowsInTable:kCharpterTable onProperty:YBBookChapterModel.chapterContent withValue:model.bookId where:YBBookChapterModel.bookId.is(model.bookId)&&YBBookChapterModel.charpterId.is(model.charpterId)];
 }
 
-+(void)slientDownWithBookId:(NSInteger)bookId charpterIds:(NSArray *)charpters
++(void)slientDownWithBookId:(NSString *)bookId charpterIds:(NSArray *)charpters
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //判断章节是否存在，如果存在不下载
@@ -67,7 +72,12 @@
 
 +(void)insertObjectWithCharpters:(YBBookChapterModel *)charpter
 {
-    [[YBDatabaseManager sharedInstance].database insertOrReplaceObject:charpter into:kCharpterTable];
+    BOOL success = [[YBDatabaseManager sharedInstance].database insertOrReplaceObject:charpter into:kCharpterTable];
+    if (success) {
+        NSLog(@"%@-存储成功",charpter.chapterName);
+    }else{
+        NSLog(@"%@-存储失败",charpter.chapterName);
+    }
 }
 
 +(void)insertObjectsWithCharpters:(NSArray *)charpters{
@@ -90,11 +100,11 @@
     }];
 }
 
-+(void)deleteAllCharpterWithBookId:(NSInteger)bookid{
-    [[YBDatabaseManager sharedInstance].database deleteObjectsFromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookid)];
++(void)deleteAllCharpterWithBookId:(NSString *)bookId{
+    [[YBDatabaseManager sharedInstance].database deleteObjectsFromTable:kCharpterTable where:YBBookChapterModel.bookId.is(bookId)];
 }
 
-+(void)getCharpterWithBookId:(NSInteger)bookId complete:(void(^)(BOOL success,YBBookChapterModel *model))complete
++(void)getCharpterWithBookId:(NSString *)bookId complete:(void(^)(BOOL success,YBBookChapterModel *model))complete
 {
     BOOL isExist = [YBBookChapterManager isExsitWithBookId:bookId];
     if (isExist) {
@@ -106,7 +116,7 @@
     }
 }
 
-+(void)getCharpterWithBookId:(NSInteger)bookId charpterId:(NSString *)charpterId complete:(void(^)(BOOL success,YBBookChapterModel *model))complete{
++(void)getCharpterWithBookId:(NSString *)bookId charpterId:(NSString *)charpterId complete:(void(^)(BOOL success,YBBookChapterModel *model))complete{
     YBBookChapterModel *charpter = [YBBookChapterManager getCharpterWithBookId:bookId charpterId:charpterId];
     if (charpter.chapterContent.length==0) {
         [[YBNetwork sharedManager] getBookChapterDetailWithUrl:charpterId WithBlock:^(YBRequestResult * _Nonnull result, NSError * _Nonnull error) {
@@ -122,7 +132,7 @@
                 complete(YES,charpter);
             }
         }];
-    }else{
+    }else if(charpter){
         if (complete) {
             complete(YES,charpter);
         }

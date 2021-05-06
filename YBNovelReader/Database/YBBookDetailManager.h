@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 插入或替换书籍
 +(void)insertOrReplaceModel:(YBBookDetailModel *)model;
 /// 获取书籍信息
-+(YBBookDetailModel *)getReadRecordWithBookId:(NSInteger)bookid;
++(YBBookDetailModel *)getReadRecordWithBookId:(NSString *)bookId;
 /// 更新阅读时间
 +(void)updateReadTime:(YBBookDetailModel *)model;
 /// 删除书籍
-+(void)removeBookFromBookShelfWithBookId:(NSInteger)bookid;
++(void)removeBookFromBookShelfWithBookId:(NSString *)bookId;
 
 /// 获取所有书架上的书籍
 +(NSArray *)getAllOnBookshelf;

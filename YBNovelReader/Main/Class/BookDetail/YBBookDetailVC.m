@@ -134,18 +134,28 @@
            [YBBookDetailManager updateReadTime:record];
            [weakSelf.navigationController pushViewController:controller animated:YES];
        }else{
-           YBBookChapterModel *chapterModel = record.charpterList.firstObject;
-           [[YBNetwork sharedManager] getBookChapterDetailWithUrl:chapterModel.charpterId WithBlock:^(YBRequestResult * _Nonnull result, NSError * _Nonnull error) {
-               if ([YBResultError hasErrorWithReslut:result error:error]) {
-                   return;
+//           NSString *charpterId = [YBBookChapterManager getFirstCharpterIdWirhBookId:record.bookId];
+//           NSArray *charpters =  [YBBookChapterManager getBriefCharptersWithBookId:record.bookId];
+//           YBBookChapterModel *chapterModel = charpters.firstObject;
+           [YBBookChapterManager getCharpterWithBookId:record.bookId complete:^(BOOL success, YBBookChapterModel * _Nonnull model) {
+               if (success) {
+                   record.charpterModel = model;
+                   [YBBookDetailManager insertOrReplaceModel:record];
+                   controller.bookDetail = record;
+                   [weakSelf.navigationController pushViewController:controller animated:YES];
                }
-               NSString *contentStr = result.data;
-               chapterModel.chapterContent = contentStr;
-               [YBBookDetailManager insertOrReplaceModel:record];
-               weakSelf.bookDetailModel.charpterModel = chapterModel;
-               controller.bookDetail = record;
-               [weakSelf.navigationController pushViewController:controller animated:YES];
            }];
+//           [[YBNetwork sharedManager] getBookChapterDetailWithUrl:charpterId WithBlock:^(YBRequestResult * _Nonnull result, NSError * _Nonnull error) {
+//               if ([YBResultError hasErrorWithReslut:result error:error]) {
+//                   return;
+//               }
+//               NSString *contentStr = result.data;
+//               chapterModel.chapterContent = contentStr;
+//               [YBBookDetailManager insertOrReplaceModel:record];
+//               weakSelf.bookDetailModel.charpterModel = chapterModel;
+//               controller.bookDetail = record;
+//               [weakSelf.navigationController pushViewController:controller animated:YES];
+//           }];
        }
 }
 

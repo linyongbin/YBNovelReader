@@ -5,9 +5,11 @@
 //  Created by 林勇彬 on 2021/4/29.
 //
 
+#import "YBBookDetailModel+WCTTableCoding.h"
 #import "YBBookDetailModel.h"
 #import "TFHpple.h"
 #import <WCDB.h>
+
 @implementation YBBookDetailModel
 
 
@@ -27,10 +29,13 @@ WCDB_PRIMARY(YBBookDetailModel, bookId)
 
 - (id)analysisWithData:(id)data{
     TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:data];
-    TFHppleElement *name = [xpathParser searchWithXPathQuery:@"//*[@id='info']/h1/text()"].firstObject;
-    TFHppleElement *author = [xpathParser searchWithXPathQuery:@"//*[@id='info']/p[1]/text()"].firstObject;
-    TFHppleElement *image = [xpathParser searchWithXPathQuery:@"//*[@id='fmimg']/img/@src"].firstObject;
-    TFHppleElement *intro = [xpathParser searchWithXPathQuery:@"//*[@id='intro']/p[2]/text()"].firstObject;
+    //[15]
+    TFHppleElement *bookUrl = [xpathParser searchWithXPathQuery:@"//meta[@property='og:novel:read_url']/@content"].firstObject;
+    TFHppleElement *author = [xpathParser searchWithXPathQuery:@"//meta[@property='og:novel:author']/@content"].firstObject;
+    TFHppleElement *intro = [xpathParser searchWithXPathQuery:@"//meta[@property='og:description']/@content"].firstObject;
+
+    TFHppleElement *name = [xpathParser searchWithXPathQuery:@"//meta[@property='og:title']/@content"].firstObject;
+    TFHppleElement *image = [xpathParser searchWithXPathQuery:@"//meta[@property='og:image']/@content"].firstObject;
     TFHppleElement *time = [xpathParser searchWithXPathQuery:@"//*[@id='info']/p[3]/text()"].firstObject;
     TFHppleElement *chapter = [xpathParser searchWithXPathQuery:@"//*[@id='info']/p[4]/a/text()"].firstObject;
     NSArray *chapters = [xpathParser searchWithXPathQuery:@"//*[@id='list']/dl/dd"];
@@ -41,6 +46,8 @@ WCDB_PRIMARY(YBBookDetailModel, bookId)
     self.bookIntro = intro.content;
     self.updateDate = time.content;
     self.chapterNew = chapter.content;
+    self.bookUrl = bookUrl.content;
+    self.bookId = bookUrl.content;
     
     NSMutableArray *array = [NSMutableArray array];
     for (TFHppleElement *model in chapters) {
@@ -49,10 +56,28 @@ WCDB_PRIMARY(YBBookDetailModel, bookId)
         TFHppleElement *chapterUrl = [model searchWithXPathQuery:@"//a/@href"].firstObject;
         chapterModel.chapterName = chapterName.content;
         chapterModel.charpterId = chapterUrl.content;
+        chapterModel.bookName = name.content;
+        chapterModel.author = author.content;
+        chapterModel.bookId = bookUrl.content;
         [array addObject:chapterModel];
     }
     self.charpterList = array;
     return self;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) {
+        return YES;
+    }
+    if ([object isKindOfClass:self.class]){
+        YBBookDetailModel *model = object;
+           if (self.bookId == model.bookId && self.bookId!=0) {
+               return YES;
+           }
+    }
+   
+    return NO;
 }
 
 @end
