@@ -10,14 +10,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YBBookChapterModel : YBBaseModel
-@property (nonatomic,copy) NSString *primaryId;
+@property (nonatomic, copy) NSString *primaryId;
+@property (nonatomic, assign) NSInteger charpterId;
 
 @property (nonatomic, copy) NSString *chapterName;
-@property (nonatomic, copy) NSString *charpterId;
 @property (nonatomic, copy) NSString *chapterContent;
+@property (nonatomic, copy) NSString *charpterUrl;
 
 //数据库存储使用
-@property (nonatomic,copy) NSString *bookId;
+@property (nonatomic, assign) NSInteger bookId;
 @property (nonatomic,copy) NSString *bookName;
 @property (nonatomic,copy) NSString *author;
 @end

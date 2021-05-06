@@ -36,6 +36,16 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define UIColorFromRGBA(rgbValue,A) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:A]
 
 
+#define  adjustsContentInsets(scrollView)\
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
+[scrollView   performSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:") withObject:@(2)];\
+}\
+_Pragma("clang diagnostic pop") \
+} while (0)
+
 // path
 #define PATH_APP_HOME       NSHomeDirectory()
 #define PATH_TEMP           NSTemporaryDirectory()
@@ -50,7 +60,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 //#define WXAppKey @"wx035a9c5d1d9bf7e7"
 //#define JPushKey @"e6cfd9774d84d78a7e2abf2a"
 //#define ZhiChiAppKey @"ee94f9d0ff174334924fe9280c3be3cc"
-#define QHBaseUrl @"http://www.xbiquge.la/"
+#define QHBaseUrl @"http://www.xbiquge.la"
 
 
 #endif /* QHCommonDefine_h */

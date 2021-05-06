@@ -18,6 +18,7 @@ WCDB_PROPERTY(bookName)
 WCDB_PROPERTY(bookAuthor)
 WCDB_PROPERTY(bookIntro)
 WCDB_PROPERTY(bookUrl)
+WCDB_PROPERTY(charpterList)
 
 WCDB_PROPERTY(charpterModel)
 WCDB_PROPERTY(page)

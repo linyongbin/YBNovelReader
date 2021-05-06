@@ -16,20 +16,13 @@ WCDB_IMPLEMENTATION(YBBookChapterModel)
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, primaryId,"primaryId")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, charpterId,"charpterId")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, chapterName,"chapterName")
+WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, charpterUrl,"charpterUrl")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, chapterContent,"chapterContent")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, bookId,"bookId")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, bookName,"bookName")
 WCDB_SYNTHESIZE_COLUMN(YBBookChapterModel, author,"author")
 
 WCDB_PRIMARY(YBBookChapterModel, primaryId)
-
--(NSString *)primaryId
-{
-    if (!_primaryId) {
-        _primaryId = [NSString stringWithFormat:@"%@%@",_bookId,_charpterId];
-    }
-    return _primaryId;
-}
 
 - (NSString *)analysisWithData:(id)data{
     TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:data];

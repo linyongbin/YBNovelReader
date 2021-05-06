@@ -17,6 +17,20 @@
 		2239CBA0263BF0B30013EE56 /* YBReadConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239CB9F263BF0B30013EE56 /* YBReadConfigManager.m */; };
 		2239CBA7263BFE9B0013EE56 /* RDBatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239CBA5263BFE9B0013EE56 /* RDBatteryView.m */; };
 		2239CBB6263C00640013EE56 /* UIView+rd_wid.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239CBB5263C00640013EE56 /* UIView+rd_wid.m */; };
+		22A76AFA2643F48D00DCCA39 /* RDReadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AD92643F48C00DCCA39 /* RDReadProgressView.m */; };
+		22A76AFD2643F48D00DCCA39 /* RDReadCatalogHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AE42643F48C00DCCA39 /* RDReadCatalogHeader.m */; };
+		22A76AFE2643F48D00DCCA39 /* RDReadCatalogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AE82643F48C00DCCA39 /* RDReadCatalogView.m */; };
+		22A76AFF2643F48D00DCCA39 /* RDReadCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AE92643F48C00DCCA39 /* RDReadCatalogCell.m */; };
+		22A76B002643F48D00DCCA39 /* RDReadToolPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AEC2643F48C00DCCA39 /* RDReadToolPageView.m */; };
+		22A76B012643F48D00DCCA39 /* RDReadToolTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AEF2643F48C00DCCA39 /* RDReadToolTheme.m */; };
+		22A76B022643F48D00DCCA39 /* RDReadSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF02643F48C00DCCA39 /* RDReadSetView.m */; };
+		22A76B032643F48D00DCCA39 /* RDMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF12643F48C00DCCA39 /* RDMenuView.m */; };
+		22A76B042643F48D00DCCA39 /* RDReadSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF22643F48C00DCCA39 /* RDReadSliderView.m */; };
+		22A76B052643F48D00DCCA39 /* RDReadLightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF42643F48C00DCCA39 /* RDReadLightView.m */; };
+		22A76B072643F48D00DCCA39 /* RDReadToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF72643F48D00DCCA39 /* RDReadToolBar.m */; };
+		22A76B082643F48D00DCCA39 /* RDReadTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76AF92643F48D00DCCA39 /* RDReadTopBar.m */; };
+		22A76B112643F5D100DCCA39 /* RDLayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76B102643F5D100DCCA39 /* RDLayoutButton.m */; };
+		22A76B172643F61900DCCA39 /* RDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A76B162643F61900DCCA39 /* RDButton.m */; };
 		22D01657263A3F810028DD11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D01656263A3F810028DD11 /* AppDelegate.m */; };
 		22D01662263A3F840028DD11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D01661263A3F840028DD11 /* Assets.xcassets */; };
 		22D01665263A3F840028DD11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D01663263A3F840028DD11 /* LaunchScreen.storyboard */; };
@@ -94,6 +108,34 @@
 		2239CBA6263BFE9B0013EE56 /* RDBatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBatteryView.h; sourceTree = "<group>"; };
 		2239CBB4263C00640013EE56 /* UIView+rd_wid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+rd_wid.h"; sourceTree = "<group>"; };
 		2239CBB5263C00640013EE56 /* UIView+rd_wid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+rd_wid.m"; sourceTree = "<group>"; };
+		22A76AD92643F48C00DCCA39 /* RDReadProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadProgressView.m; sourceTree = "<group>"; };
+		22A76ADA2643F48C00DCCA39 /* RDReadLightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadLightView.h; sourceTree = "<group>"; };
+		22A76ADB2643F48C00DCCA39 /* RDMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDMenuView.h; sourceTree = "<group>"; };
+		22A76AE22643F48C00DCCA39 /* RDReadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadProgressView.h; sourceTree = "<group>"; };
+		22A76AE42643F48C00DCCA39 /* RDReadCatalogHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadCatalogHeader.m; sourceTree = "<group>"; };
+		22A76AE52643F48C00DCCA39 /* RDReadCatalogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadCatalogView.h; sourceTree = "<group>"; };
+		22A76AE62643F48C00DCCA39 /* RDReadCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadCatalogCell.h; sourceTree = "<group>"; };
+		22A76AE72643F48C00DCCA39 /* RDReadCatalogHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadCatalogHeader.h; sourceTree = "<group>"; };
+		22A76AE82643F48C00DCCA39 /* RDReadCatalogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadCatalogView.m; sourceTree = "<group>"; };
+		22A76AE92643F48C00DCCA39 /* RDReadCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadCatalogCell.m; sourceTree = "<group>"; };
+		22A76AEA2643F48C00DCCA39 /* RDReadSetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadSetView.h; sourceTree = "<group>"; };
+		22A76AEC2643F48C00DCCA39 /* RDReadToolPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadToolPageView.m; sourceTree = "<group>"; };
+		22A76AED2643F48C00DCCA39 /* RDReadToolTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadToolTheme.h; sourceTree = "<group>"; };
+		22A76AEE2643F48C00DCCA39 /* RDReadToolPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadToolPageView.h; sourceTree = "<group>"; };
+		22A76AEF2643F48C00DCCA39 /* RDReadToolTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadToolTheme.m; sourceTree = "<group>"; };
+		22A76AF02643F48C00DCCA39 /* RDReadSetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadSetView.m; sourceTree = "<group>"; };
+		22A76AF12643F48C00DCCA39 /* RDMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDMenuView.m; sourceTree = "<group>"; };
+		22A76AF22643F48C00DCCA39 /* RDReadSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadSliderView.m; sourceTree = "<group>"; };
+		22A76AF32643F48C00DCCA39 /* RDReadSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadSliderView.h; sourceTree = "<group>"; };
+		22A76AF42643F48C00DCCA39 /* RDReadLightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadLightView.m; sourceTree = "<group>"; };
+		22A76AF62643F48D00DCCA39 /* RDReadToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadToolBar.h; sourceTree = "<group>"; };
+		22A76AF72643F48D00DCCA39 /* RDReadToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadToolBar.m; sourceTree = "<group>"; };
+		22A76AF82643F48D00DCCA39 /* RDReadTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDReadTopBar.h; sourceTree = "<group>"; };
+		22A76AF92643F48D00DCCA39 /* RDReadTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDReadTopBar.m; sourceTree = "<group>"; };
+		22A76B0F2643F5D100DCCA39 /* RDLayoutButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLayoutButton.h; sourceTree = "<group>"; };
+		22A76B102643F5D100DCCA39 /* RDLayoutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLayoutButton.m; sourceTree = "<group>"; };
+		22A76B152643F61900DCCA39 /* RDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDButton.h; sourceTree = "<group>"; };
+		22A76B162643F61900DCCA39 /* RDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDButton.m; sourceTree = "<group>"; };
 		22D01652263A3F810028DD11 /* YBNovelReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBNovelReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D01655263A3F810028DD11 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22D01656263A3F810028DD11 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -227,10 +269,54 @@
 		2239CBA4263BFE930013EE56 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				22A76AE32643F48C00DCCA39 /* Catalog */,
 				2239CBA6263BFE9B0013EE56 /* RDBatteryView.h */,
 				2239CBA5263BFE9B0013EE56 /* RDBatteryView.m */,
+				22A76ADB2643F48C00DCCA39 /* RDMenuView.h */,
+				22A76AF12643F48C00DCCA39 /* RDMenuView.m */,
+				22A76ADA2643F48C00DCCA39 /* RDReadLightView.h */,
+				22A76AF42643F48C00DCCA39 /* RDReadLightView.m */,
+				22A76AE22643F48C00DCCA39 /* RDReadProgressView.h */,
+				22A76AD92643F48C00DCCA39 /* RDReadProgressView.m */,
+				22A76AEA2643F48C00DCCA39 /* RDReadSetView.h */,
+				22A76AF02643F48C00DCCA39 /* RDReadSetView.m */,
+				22A76AF32643F48C00DCCA39 /* RDReadSliderView.h */,
+				22A76AF22643F48C00DCCA39 /* RDReadSliderView.m */,
+				22A76AF62643F48D00DCCA39 /* RDReadToolBar.h */,
+				22A76AF72643F48D00DCCA39 /* RDReadToolBar.m */,
+				22A76AF82643F48D00DCCA39 /* RDReadTopBar.h */,
+				22A76AF92643F48D00DCCA39 /* RDReadTopBar.m */,
+				22A76B0F2643F5D100DCCA39 /* RDLayoutButton.h */,
+				22A76B102643F5D100DCCA39 /* RDLayoutButton.m */,
+				22A76B152643F61900DCCA39 /* RDButton.h */,
+				22A76B162643F61900DCCA39 /* RDButton.m */,
+				22A76AEB2643F48C00DCCA39 /* Set */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		22A76AE32643F48C00DCCA39 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				22A76AE42643F48C00DCCA39 /* RDReadCatalogHeader.m */,
+				22A76AE52643F48C00DCCA39 /* RDReadCatalogView.h */,
+				22A76AE62643F48C00DCCA39 /* RDReadCatalogCell.h */,
+				22A76AE72643F48C00DCCA39 /* RDReadCatalogHeader.h */,
+				22A76AE82643F48C00DCCA39 /* RDReadCatalogView.m */,
+				22A76AE92643F48C00DCCA39 /* RDReadCatalogCell.m */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		22A76AEB2643F48C00DCCA39 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				22A76AEE2643F48C00DCCA39 /* RDReadToolPageView.h */,
+				22A76AEC2643F48C00DCCA39 /* RDReadToolPageView.m */,
+				22A76AED2643F48C00DCCA39 /* RDReadToolTheme.h */,
+				22A76AEF2643F48C00DCCA39 /* RDReadToolTheme.m */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 		22D01649263A3F800028DD11 = {
@@ -744,14 +830,23 @@
 				22D016A1263A410B0028DD11 /* YBNetwork.m in Sources */,
 				2239CB4B263BB5D20013EE56 /* YBBookChapterModel.mm in Sources */,
 				22D016EE263A4C770028DD11 /* YBBookrackVC.m in Sources */,
+				22A76B042643F48D00DCCA39 /* RDReadSliderView.m in Sources */,
+				22A76B022643F48D00DCCA39 /* RDReadSetView.m in Sources */,
 				22D017D5263AA8860028DD11 /* XPathQuery.m in Sources */,
+				22A76B082643F48D00DCCA39 /* RDReadTopBar.m in Sources */,
+				22A76B012643F48D00DCCA39 /* RDReadToolTheme.m in Sources */,
+				22A76B172643F61900DCCA39 /* RDButton.m in Sources */,
 				22D01730263A5FA00028DD11 /* AFTabBarItem.m in Sources */,
 				2239CB90263BEB050013EE56 /* YBBookReadPageVC.m in Sources */,
+				22A76AFA2643F48D00DCCA39 /* RDReadProgressView.m in Sources */,
 				22D017E5263AABB50028DD11 /* YBSearchModel.m in Sources */,
+				22A76AFF2643F48D00DCCA39 /* RDReadCatalogCell.m in Sources */,
 				22D016AD263A41200028DD11 /* YBResultError.m in Sources */,
 				22D016E1263A48540028DD11 /* YBSearchVC.m in Sources */,
 				22D01709263A4F3C0028DD11 /* YBNavigationController.m in Sources */,
+				22A76B032643F48D00DCCA39 /* RDMenuView.m in Sources */,
 				22D017FA263AB5DE0028DD11 /* YBBookListVC.m in Sources */,
+				22A76AFE2643F48D00DCCA39 /* RDReadCatalogView.m in Sources */,
 				22D01737263A60180028DD11 /* UIColor+APP.m in Sources */,
 				22D01698263A41000028DD11 /* YBApiManager.m in Sources */,
 				22D017D3263AA8860028DD11 /* TFHppleElement.m in Sources */,
@@ -761,11 +856,14 @@
 				E8C626CD263AD27400501DCF /* YBBookDetailVC.m in Sources */,
 				E8C626D4263AD7B200501DCF /* YBBookDetailModel.mm in Sources */,
 				22D01657263A3F810028DD11 /* AppDelegate.m in Sources */,
+				22A76B002643F48D00DCCA39 /* RDReadToolPageView.m in Sources */,
 				22D0172F263A5FA00028DD11 /* AFTabBarViewController.m in Sources */,
+				22A76B052643F48D00DCCA39 /* RDReadLightView.m in Sources */,
 				2239CBA7263BFE9B0013EE56 /* RDBatteryView.m in Sources */,
 				22D0180F263AB7F60028DD11 /* YBBaseTableViewCell.m in Sources */,
 				22D01668263A3F840028DD11 /* main.m in Sources */,
 				22D01818263AB82D0028DD11 /* YBSearchCell.m in Sources */,
+				22A76AFD2643F48D00DCCA39 /* RDReadCatalogHeader.m in Sources */,
 				E8C626C7263ACE6B00501DCF /* YBUtil.m in Sources */,
 				2239CB61263BC78B0013EE56 /* YBBookChapterManager.mm in Sources */,
 				2239CB8A263BEAED0013EE56 /* YBBookReadVC.m in Sources */,
@@ -773,7 +871,9 @@
 				22D016A7263A41170028DD11 /* YBRequestResult.m in Sources */,
 				2239CB34263BB1F90013EE56 /* YBDatabaseManager.mm in Sources */,
 				2239CB97263BF0980013EE56 /* YBReadParser.m in Sources */,
+				22A76B072643F48D00DCCA39 /* RDReadToolBar.m in Sources */,
 				2239CB67263BC7A20013EE56 /* YBBookDetailManager.mm in Sources */,
+				22A76B112643F5D100DCCA39 /* RDLayoutButton.m in Sources */,
 				22D017EE263AACD20028DD11 /* YBBaseModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

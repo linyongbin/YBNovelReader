@@ -32,13 +32,13 @@
 /// @param urlStr 书本链接
 /// @param block 回调
 - (NSURLSessionDataTask *)getBookDetailWithUrl:(NSString *)urlStr WithBlock:(void (^)(YBRequestResult *result,NSError * error))block{
-    return [[YBApiManager sharedManager] getStartRequestWithApiPath:urlStr isJsonParameter:NO parameters:nil modelClass:NSClassFromString(@"YBBookDetailModel") WithBlock:block];
+    return [[YBApiManager sharedManager] getStartRequestWithApiPath:urlStr?:@"" isJsonParameter:NO parameters:nil modelClass:NSClassFromString(@"YBBookDetailModel") WithBlock:block];
 }
 
 /// 章节详情
 /// @param urlStr 书本链接
 /// @param block 回调
 - (NSURLSessionDataTask *)getBookChapterDetailWithUrl:(NSString *)urlStr WithBlock:(void (^)(YBRequestResult *result,NSError * error))block{
-    return [[YBApiManager sharedManager] getStartRequestWithApiPath:urlStr isJsonParameter:NO parameters:nil modelClass:NSClassFromString(@"YBBookChapterModel") WithBlock:block];
+    return [[YBApiManager sharedManager] getStartRequestWithApiPath:urlStr?:@"" isJsonParameter:NO parameters:nil modelClass:NSClassFromString(@"YBBookChapterModel") WithBlock:block];
 }
 @end

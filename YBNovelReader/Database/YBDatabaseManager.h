@@ -8,8 +8,8 @@
 #import "YBBaseModel.h"
 #import <WCDB.h>
 #define kBookDatabase @"book"
-#define kCharpterTable @"chapter"
 #define kBookrackTable @"bookrack"
+#define kCharpterTable @"chapter"
 
 NS_ASSUME_NONNULL_BEGIN
 

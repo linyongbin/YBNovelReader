@@ -22,6 +22,7 @@ WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, bookAuthor, "bookAuthor")
 WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, bookIntro, "bookIntro")
 WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, bookUrl, "bookUrl")
 WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, charpterModel, "charpterModel")
+WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, charpterList, "charpterList")
 WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, page, "page")
 WCDB_SYNTHESIZE_COLUMN(YBBookDetailModel, readTime, "readTime")
 
@@ -47,7 +48,7 @@ WCDB_PRIMARY(YBBookDetailModel, bookId)
     self.updateDate = time.content;
     self.chapterNew = chapter.content;
     self.bookUrl = bookUrl.content;
-    self.bookId = bookUrl.content;
+    self.bookId = [[[bookUrl.content lastPathComponent] stringByDeletingPathExtension] integerValue];
     
     NSMutableArray *array = [NSMutableArray array];
     for (TFHppleElement *model in chapters) {
@@ -55,10 +56,11 @@ WCDB_PRIMARY(YBBookDetailModel, bookId)
         TFHppleElement *chapterName = [model searchWithXPathQuery:@"//text()"].firstObject;
         TFHppleElement *chapterUrl = [model searchWithXPathQuery:@"//a/@href"].firstObject;
         chapterModel.chapterName = chapterName.content;
-        chapterModel.charpterId = chapterUrl.content;
+        chapterModel.charpterId = [[[chapterUrl.content lastPathComponent] stringByDeletingPathExtension] integerValue];
+        chapterModel.charpterUrl = chapterUrl.content;
         chapterModel.bookName = name.content;
         chapterModel.author = author.content;
-        chapterModel.bookId = bookUrl.content;
+        chapterModel.bookId = self.bookId;
         [array addObject:chapterModel];
     }
     self.charpterList = array;
