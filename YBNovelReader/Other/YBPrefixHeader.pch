@@ -1,0 +1,21 @@
+//
+//  YBPrefixHeader.pch
+//  YBNovelReader
+//
+//  Created by linyongbin on 2021/4/29.
+//
+
+#ifndef YBPrefixHeader_pch
+#define YBPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "QHCommonDefine.h"
+#import "UIColor+APP.h"
+#import "MBProgressHUD+HUD.h"
+#import "UIView+rd_wid.h"
+#import "YBReadConfigManager.h"
+#import <Masonry.h>
+
+#endif /* YBPrefixHeader_pch */
